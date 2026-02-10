@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AliExpress Orders</title>
+    <style>
+{{styles}}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Orders</h1>
+        
+        <div class="summary">
+            <span class="summary-text">{{order_count}} orders</span>
+            <span class="summary-total">Total: € {{total_price}}</span>
+        </div>
+        
+        <div class="sort-controls">
+            <span class="sort-label">Sort by:</span>
+            <button class="sort-btn" data-sort="default" onclick="toggleSort('default')">Default</button>
+            <button class="sort-btn" data-sort="price" onclick="toggleSort('price')">Price</button>
+            <button class="sort-btn" data-sort="date" onclick="toggleSort('date')">Date</button>
+            <button class="sort-btn" data-sort="checked" onclick="toggleSort('checked')">Received</button>
+            <button class="hide-btn" id="hideCheckedBtn" onclick="toggleHideChecked()">Hide Received</button>
+        </div>
+        
+        <div id="orders-container">
+{{order_cards}}
+        </div>
+        
+        <div class="footer">
+            <span class="footer-text">{{order_count}} orders</span>
+            <span class="footer-total">Total: € {{total_price}}</span>
+        </div>
+    </div>
+    
+    <script>
+{{script}}
+    </script>
+</body>
+</html>

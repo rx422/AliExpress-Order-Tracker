@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Generated files
+AliExpress_Orders.html
+
+# Saved AliExpress pages (large files with personal data)
+*.html
+!README.md
+!templates/*.html
+*_files/
+
+# Source data folders (contain personal order data)
+active/
+archive/
+
+# Cache
+exchange_rate_cache.json
+
+# IDE / Tools
+.vscode/
+.idea/
+.claude/
