@@ -328,7 +328,7 @@ def render_order_card(order: Order, images_folder: Optional[Path]) -> str:
         delivery_info=order.delivery_info,
         desc_class='delivery-desc delayed' if order.is_delayed else 'delivery-desc',
         description=order.description,
-        price_formatted=f'{order.price:.2f}',
+        price_formatted=f'{order.price:.2f}'.replace('.', ','),
         card_extra_class=' archived' if order.is_archived else '',
         checkbox_attrs=' checked disabled' if order.is_archived else '',
     )
