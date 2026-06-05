@@ -200,3 +200,16 @@ document.querySelectorAll('input[type="checkbox"][data-order]').forEach(cb => {
         }
     });
 });
+
+// Scroll-to-top button: show after scrolling down, smooth-scroll to top on click
+const scrollTopBtn = document.getElementById('scrollTopBtn');
+if (scrollTopBtn) {
+    const toggleScrollBtn = () => {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+    };
+    window.addEventListener('scroll', toggleScrollBtn, { passive: true });
+    toggleScrollBtn();
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
