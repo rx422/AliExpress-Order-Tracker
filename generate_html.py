@@ -247,8 +247,10 @@ def parse_orders(html_content: str, is_archived: bool = False) -> List[Order]:
         price_match = re.search(r'totalPrice__1tjf5">([^<]+)</div>', block)
         price, is_usd = parse_price(price_match.group(1)) if price_match else (0.0, False)
         
-        # Image
-        image_match = re.search(r'src="[^"]*_files/([^"]+\.jpg)"', block)
+        # Image (AliExpress saves thumbnails as jpg, png or webp)
+        image_match = re.search(
+            r'src="[^"]*_files/([^"]+\.(?:jpe?g|png|webp|gif|avif))"', block, re.IGNORECASE
+        )
         local_image = image_match.group(1) if image_match else ""
         
         # Delivery date
@@ -283,7 +285,10 @@ def get_image_base64(image_filename: str, images_folder: Path) -> Optional[str]:
     try:
         with open(image_path, 'rb') as f:
             img_data = base64.b64encode(f.read()).decode('utf-8')
-            return f'data:image/jpeg;base64,{img_data}'
+            ext = image_path.suffix.lower().lstrip('.')
+            mime = {'jpg': 'jpeg', 'jpeg': 'jpeg', 'png': 'png',
+                    'webp': 'webp', 'gif': 'gif', 'avif': 'avif'}.get(ext, 'jpeg')
+            return f'data:image/{mime};base64,{img_data}'
     except:
         return None
 
@@ -454,6 +459,7 @@ def main():
     archive_count = len(archive_orders)
     print(f"\nHTML file saved to: {output_path}")
     print(f"{len(all_orders)} orders total ({active_count} active, {archive_count} archived), total: €{total_price:.2f}")
+    input()
 
 
 if __name__ == '__main__':

@@ -1,0 +1,1 @@
+C:\Users\BirnazAdrian\AppData\Local\Programs\Python\Python310\python.exe generate_html.py
