@@ -109,7 +109,6 @@ h1 {
     cursor: pointer;
     transition: all 0.2s ease;
     color: #333;
-    margin-left: auto;
 }
 
 .hide-btn:hover {
@@ -121,6 +120,23 @@ h1 {
     background: #ff9800;
     border-color: #ff9800;
     color: white;
+}
+
+.export-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #333;
+    margin-left: auto;
+}
+
+.export-btn:hover {
+    border-color: #ff9800;
+    color: #ff9800;
 }
 
 .order-card.hidden {
@@ -355,19 +371,39 @@ h1 {
 }
 
 @media print {
-    .scroll-top-btn {
-        display: none;
+    @page {
+        size: A4;
+        margin: 12mm;
     }
 
     body {
         background: white;
-        padding: 10px;
+        padding: 0;
+        -webkit-print-color-adjust: exact;   /* render badge/desc colors + thumbnails */
+        print-color-adjust: exact;           /* inherited by all descendants */
     }
-    
-    .order-card {
+
+    .container {
+        max-width: none;                     /* fill the A4 content box */
+    }
+
+    .scroll-top-btn,
+    .sort-controls,
+    .checkbox-wrapper,
+    .trash-btn {
+        display: none !important;
+    }
+
+    .order-card,
+    .summary,
+    .footer {
         box-shadow: none;
-        border: 1px solid #eee;
+        border: 1px solid #e0e0e0;           /* keep card outline without screen shadow */
+    }
+
+    .order-card {
         break-inside: avoid;
+        page-break-inside: avoid;            /* no card split across page breaks */
     }
 }
 
